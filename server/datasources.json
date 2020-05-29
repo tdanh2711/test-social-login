@@ -1,0 +1,8 @@
+{
+  "db": {
+    "name": "db",
+    "localStorage": "tslDb",
+    "file": "./db/db.json",
+    "connector": "memory"
+  }
+}

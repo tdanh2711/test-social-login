@@ -1,0 +1,11 @@
+{
+  "ids": {
+    "user": 3
+  },
+  "models": {
+    "user": {
+      "1": "{\"email\":\"string@gmail.com\",\"name\":\"Tran Duc Anh\",\"avatar\":\"http://via.placeholder.com/320\",\"id\":1}",
+      "2": "{\"email\":\"string@gmail.com\",\"name\":\"Tran Duc Anh\",\"avatar\":\"http://via.placeholder.com/320\",\"id\":2}"
+    }
+  }
+}
