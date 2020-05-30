@@ -15,9 +15,13 @@
       "type": "string",
       "required": true
     },
-    "name": {
+    "nameFb": {
       "type": "string",
-      "required": true
+      "required": false
+    },
+    "nameGg": {
+      "type": "string",
+      "required": false
     },
     "avatar": {
       "type": "string",
