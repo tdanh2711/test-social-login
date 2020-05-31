@@ -4,8 +4,8 @@
   },
   "models": {
     "user": {
-      "1": "{\"email\":\"string@gmail.com\",\"name\":\"Tran Duc Anh\",\"avatar\":\"http://via.placeholder.com/320\",\"id\":1}",
-      "2": "{\"email\":\"string@gmail.com\",\"name\":\"Tran Duc Anh\",\"avatar\":\"http://via.placeholder.com/320\",\"id\":2}"
+      "1": "{\"email\":\"tdanh2711@gmail.com\",\"nameFb\":\"Trần Đức Anh\",\"avatarFb\":\"https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1534026023426196&height=200&width=200&ext=1593521959&hash=AeRC3Ot-5tuv1vuy\",\"id\":1,\"nameGg\":\"Đức Anh Trần\",\"avatarGg\":\"https://lh3.googleusercontent.com/a-/AOh14GiiVfOHA6DXleC8ElT-gDKyJHfdsJzxFXqdwiFB\"}",
+      "2": "{\"email\":\"tpanh161096@gmail.com\",\"nameGg\":\"Phuong Anh Tran\",\"avatarGg\":\"https://lh3.googleusercontent.com/a-/AOh14GiRpMA_HF4QxzmXbDQAhTGk_huYvOiS3qcOav0z\",\"id\":2}"
     }
   }
 }

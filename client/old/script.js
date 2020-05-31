@@ -14,6 +14,10 @@ window.fbAsyncInit = function() {
       version          : 'v7.0'
     });
 
+    // Register button login/logout event handler
+    document.querySelectorAll('.btn-fb-login').forEach(e => e.addEventListener('click', requestFbLogin));
+    document.querySelectorAll('.btn-fb-logout').forEach(e => e.addEventListener('click', requestFbLogout));
+
     // Check social login
     checkSocialLogin().then(values => {
         if (values.includes(true)) {
@@ -53,3 +57,54 @@ const checkSocialLogin = () => new Promise(
         values => resolve(values)
     )
 );
+
+const requestFbLogin = () => {
+    FB.login(onFbLoggedIn, {scope: 'email', return_scopes: true});
+}
+const requestFbLogout = () => {
+    FB.logout(() => {
+        // Hide buttons logout
+        document.getElementById('social-logout').classList.add('d-none');
+        // Show buttons login
+        document.getElementById('social-login').classList.remove('d-none');
+    });
+}
+
+const onFbLoggedIn = resp => {
+    // Check if logged in
+    if (!resp.status === 'connected') {
+        alert('Login cancelled');
+        return;
+    }
+
+    // Check email permission granted
+    if (!resp.authResponse.grantedScopes.split(',').includes('email')) {
+        alert('Please allow us to retrieve your email address');
+        FB.logout();
+        return;
+    }
+
+    // Hide buttons login
+    document.getElementById('social-login').classList.add('d-none');
+
+    // Show buttons logout
+    document.getElementById('social-logout').classList.remove('d-none');
+    document.querySelectorAll('.btn-fb-logout').forEach(e =>  e.classList.remove('d-none'));
+    // Hide buttons logout Gg
+    document.querySelectorAll('.btn-gg-logout').forEach(e =>  e.classList.add('d-none'));
+    
+    // Save Fb info to DB
+    saveUserFbInfo();
+}
+
+const saveUserFbInfo = () => {
+    // Get user info
+    FB.api('/me', 'GET', {'fields': 'id,name,email,picture{url}'},
+        resp => {
+            const email = resp.email;
+            const name = resp.name;
+            const avaURL = resp.picture.data.url;
+        }
+    );
+    
+}

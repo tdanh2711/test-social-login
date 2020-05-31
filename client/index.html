@@ -4,18 +4,135 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Social Login</title>
-    <link rel="stylesheet" href="/styles.css">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+        font-weight: 200;
+      }
+      h2 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-weight: 400;
+      }
+      .container {
+        padding: 0 16px;
+      }
+      .user-info {
+        display: flex;
+        align-items: center;
+        margin: 16px 0;
+      }
+      #user-avatar {
+        width: 48px;
+        height: 48px;
+        margin-right: 8px;
+        border-radius: 50%;
+      }
+      #hello-msg {
+        margin-right: 8px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        color: black;
+        background-color: white;
+        border: 1px solid #eaeaea;
+        border-radius: 2px;
+        text-decoration: none;
+      }
+      .btn:hover, .btn:focus {
+        text-decoration: none;
+        background-color: #fbfbfb;
+      }
+      .table-responsive {
+        max-width: 100%;
+        overflow-x: scroll;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        padding: 8px;
+        border: 1px solid #eaeaea;
+      }
+      th {
+        background-color: #fbfbfb;
+        font-weight: 500;
+      }
+      td {
+        white-space: nowrap;
+      }
+      .text-center {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <div id="status"></div>
-    <div id="social-login" class="d-none">
-      <button class="btn-fb-login">FB Login</button>
-      <button class="btn-gg-login">GG Login</button>
+    <div class="container">
+
+      <div class="user-info">
+        <img id="user-avatar" src="" alt="">
+        <span id="hello-msg"></span>
+        <a href="/logout" class="btn">Logout</a>
+      </div>
+
+      <div class="table-responsive">
+        <table id="table-users">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Fb Name</th>
+            <th>Gg Name</th>
+            <th>Avatar</th>
+            <th>Fb Avatar</th>
+            <th>Gg Avatar</th>
+          </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
     </div>
-    <div id="social-logout" class="d-none">
-      <button class="btn-fb-logout">FB Logout</button>
-      <button class="btn-gg-logout">GG Logout</button>
-    </div>
-    <script src="/script.js"></script>
+
+    <script type="text/javascript">
+      (function() {
+        const userAvatar = document.getElementById('user-avatar');
+        const helloMsgEle = document.getElementById('hello-msg');
+        const tbUsersBody = document.querySelector('#table-users tbody');
+
+        // Get current logged in user
+        fetch('/activeUser').then(resp => resp.json()).then(user => {
+          const name = user.name || user.nameFb || user.nameGg;
+          const avatar = user.avatar || user.avatarFb || user.avatarGg;
+          userAvatar.src = avatar;
+          userAvatar.alt = name;
+          helloMsgEle.innerHTML = `Hello <strong>${name}</strong>!`;
+        });
+
+        // Get users table
+        fetch('/api/users').then(resp => resp.json()).then(users => users.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="text-center">${user.id}</td>
+            <td>${user.email}</td>
+            <td>${user.name || 'N/A'}</td>
+            <td>${user.nameFb || 'N/A'}</td>
+            <td>${user.nameGg || 'N/A'}</td>
+            <td class="text-center">${user.avatar ? `<img src="${user.avatar}" alt="App avatar" width="48" height="48"/>` : 'N/A'}</td>
+            <td class="text-center">${user.avatarFb ? `<img src="${user.avatarFb}" alt="App avatar" width="48" height="48"/>` : 'N/A'}</td>
+            <td class="text-center">${user.avatarGg ? `<img src="${user.avatarGg}" alt="App avatar" width="48" height="48"/>` : 'N/A'}</td>
+          `;
+          tbUsersBody.appendChild(row);
+        }));
+      }());
+    </script>
   </body>
 </html>

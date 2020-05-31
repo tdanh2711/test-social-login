@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+      font-weight: 200;
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+    .container {
+      padding: 0 16px;
+      height: 100vh;
+      display: flex;
+    }
+    .social-login {
+      padding: 32px 16px;
+      margin: auto;
+      border: 1px solid #eaeaea;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .btn {
+      display: block;
+      padding: 8px 16px;
+      margin-bottom: 8px;
+      color: black;
+      background-color: white;
+      border: 1px solid #eaeaea;
+      border-radius: 2px;
+      text-decoration: none;
+    }
+    .btn:hover, .btn:focus {
+      text-decoration: none;
+      background-color: #fbfbfb;
+    }
+
+    @media (min-width: 768px) {
+      .social-login {
+        width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="social-login">
+      <h2>SOCIAL LOGIN</h2>
+      <a href="/auth/facebook" class="btn">Login with Facebook</a>
+      <a href="/auth/google" class="btn">Login with Google</a>
+    </div>
+  </div>
+</body>
+</html>
